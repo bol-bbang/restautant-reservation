@@ -1,9 +1,12 @@
 package com.ojt.green.eatgo.interfaces;
 
+import com.ojt.green.eatgo.domain.RestaurantRepository;
+import com.ojt.green.eatgo.domain.RestaurantRepositoryImpl;
 import org.hamcrest.core.StringContains;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
@@ -16,6 +19,9 @@ class RestaurantControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @SpyBean(RestaurantRepositoryImpl.class)
+    RestaurantRepository restaurantRepository;
 
     @Test
     public void list() throws Exception {
