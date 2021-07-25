@@ -23,6 +23,10 @@ class RestaurantControllerTest {
     @SpyBean(RestaurantRepositoryImpl.class)
     RestaurantRepository restaurantRepository;
 
+    @SpyBean(MenuItemRepositoryImpl.class)
+    MenuItemRepository menuItemRepository;
+
+
     @Test
     public void list() throws Exception {
         mvc.perform(get("/restaurants"))
@@ -40,18 +44,21 @@ class RestaurantControllerTest {
         mvc.perform(get("/restaurants/1004"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
-                        StringContains.containsString("\"id\":1004")
+                        containsString("\"id\":1004")
                 ))
                 .andExpect(content().string(
-                        StringContains.containsString("\"name\":\"Green\"")
+                        containsString("\"name\":\"Green\"")
+                ))
+                .andExpect(content().string(
+                        containsString("Kimchi")
                 ));
         mvc.perform(get("/restaurants/1005"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
-                        StringContains.containsString("\"id\":1005")
+                        containsString("\"id\":1005")
                 ))
                 .andExpect(content().string(
-                        StringContains.containsString("\"name\":\"Shin-jun\"")
+                        containsString("\"name\":\"Shin-jun\"")
                 ));
     }
 
